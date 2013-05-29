@@ -1,5 +1,5 @@
 <?php
-    require('/Applications/MAMP/htdocs/cms/classes/class_login.php');
+    require('/Applications/MAMP/htdocs/BootstrapCMS/classes/class_login.php');
 
     $oLogin = new Login;
 
