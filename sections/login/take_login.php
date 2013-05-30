@@ -1,7 +1,6 @@
 <?php
-    require('/Applications/MAMP/htdocs/BootstrapCMS/classes/class_login.php');
+    require_once('/Applications/MAMP/htdocs/BootstrapCMS/classes/class_user.php');
 
-    $oLogin = new Login;
-
-    echo $oLogin->verify_password("testPassword");
+    $oLogin = new User;
+    echo $oLogin->verify_user($_POST['signinUsername'], $_POST['signinPassword']);
 ?>

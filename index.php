@@ -56,9 +56,9 @@
                                 </ul>
                             </li>
                         </ul>
-                        <form class="navbar-form pull-right" action="sections/login/take_login.php">
-                            <input class="span2" type="text" placeholder="Email">
-                            <input class="span2" type="password" placeholder="Password">
+                        <form class="navbar-form pull-right" action="sections/login/take_login.php" method="POST">
+                            <input class="span2" type="text" name="signinUsername" placeholder="Username">
+                            <input class="span2" type="password" name="signinPassword" placeholder="Password">
                             <button type="submit" class="btn">Sign in</button>
                         </form>
                     </div><!--/.nav-collapse -->
@@ -88,9 +88,40 @@
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                </div>
                 <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                    <?php
+                    if (isset($_GET['createUser']))
+                    {
+                        if ($_GET['createUser'] == 1)
+                        {
+                        ?>
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Success!</strong> We&rsquo;ve created a user named <?php echo $_GET['username']; ?>
+                        </div>
+                        <?php
+                        }
+                    }
+                    ?>
+                    <h2>Register Now!</h2>
+                    <form name="register" action="sections/register/take_register.php" method="POST">
+                        <div class="control-group">
+                            <label class="control-label" for="inputUsername">Username</label>
+                            <div class="controls">
+                                <input type="text" class="span4" id="inputUsername" name="registerUsername" placeholder="Username">
+                            </div>
+                        </div>
+                      <div class="control-group">
+                        <label class="control-label" for="inputPassword">Password</label>
+                        <div class="controls">
+                          <input type="password" class="span4" id="inputPassword" name="registerPassword" placeholder="Password">
+                        </div>
+                      </div>
+                      <div class="control-group">
+                        <div class="controls">
+                          <button type="submit" class="btn">Register</button>
+                        </div>
+                      </div>
+                    </form>
                 </div>
             </div>
 

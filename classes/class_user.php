@@ -8,6 +8,7 @@
         private $passwordHash;
         private $passwordSalt;
         private $error;
+        private $numberOfResults;
 
         //This function creates a new user
         function create_user($username, $password)
@@ -20,9 +21,10 @@
             $oDB->bind(':username', $username);
             $usernameCheckRow = $oDB->single();
 
-            if (count($usernameCheckRow) == 1)
+            $this->numberOfResults = count($usernameCheckRow);
+
+            if ($this->numberOfResults >= 1)
             {
-                //We found a matching username. Sooo sorry!
                 $this->error = true;
             }
 
@@ -30,42 +32,66 @@
             {
                 $this->username = $username;
                 //Generate a unique salt for the user
-                $this->passwordSalt = $this->better_crypt($password);
+                $this->passwordHash = $this->better_crypt($password, 7);
                 //Use the unique salt to generate an encrypted password
-                $this->passwordHash = crypt($password, $this->passwordSalt);
 
+                //Begin the transaction
+                $oDB->beginTransaction();
                 //Prep the statement to put these into our database.
-                $oDB->query("INSERT into users (username, password, salt) VALUES (:username, :password, :salt)");
+                $oDB->query("INSERT into users (username, password) VALUES (:username, :password)");
                 //Bind the data we want
                 $oDB->bind(':username', $username);
                 $oDB->bind(':password', $this->passwordHash);
-                $oDB->bind(':salt', $this->passwordSalt);
                 //Execute the statement
                 $oDB->execute();
                 //End the transaction
                 $oDB->endTransaction();
+
+                return true;
             }
             else
             {
-                die("The username is already taken.");
+                return false;
             }
+        }
 
+        function verify_user($username, $password)
+        {
+            $oDB = new Database;
+            $this->error = false;
+
+            //Check if there is a matching username, if there is, we don't want duplicates, so prevent them from !
+            $oDB->query('SELECT username, password FROM users WHERE username = :username');
+            $oDB->bind(':username', $username);
+            $usernameCheckRow = $oDB->single();
+
+            if (isset($usernameCheckRow['username']) && isset($usernameCheckRow['password']))
+            {
+                if ($this->verify_password($password, $usernameCheckRow['password']))
+                {
+                    echo "Nice!";
+                }
+                else
+                {
+                    echo "D'oh!";
+                }
+            }
         }
 
         //This function verifies a user's password against the one in the database
         //This function verifies the user input password versus the password we have on file for them in the database.
-        function verify_password($password, $passwordSalt, $passwordHash)
+        function verify_password($password, $passwordHash)
         {
-
-            //crypt($string, $salt)
-            if (crypt($password, $this->passwordSalt) == $this->passwordHash)
+            //crypt($string, $salt) —- Note, we are letting blowfish determine the key from hash. It's smart enough to do that :)
+            if (crypt($password, $passwordHash) == $passwordHash)
             {
                 //password is correct
-                echo "Awesome";
+                return true;
             }
             else
             {
                 //password is incorrect
+                return false;
             }
         }
 
