@@ -21,10 +21,9 @@
             $oDB->bind(':username', $username);
             $usernameCheckRow = $oDB->single();
 
-            $this->numberOfResults = count($usernameCheckRow);
-
-            if ($this->numberOfResults >= 1)
+            if (isset($usernameCheckRow['username']))
             {
+                //The username is already taken
                 $this->error = true;
             }
 
