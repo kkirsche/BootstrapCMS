@@ -10,14 +10,15 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <style>
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
         </style>
-        <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
+        <link rel="stylesheet" href="css/flat-ui.css">
         <link rel="stylesheet" href="css/main.css">
 
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
@@ -37,7 +38,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
-                    <a class="brand" href="#">Project name</a>
+                    <a class="brand" href="#">BootstrapCMS</a>
                     <div class="nav-collapse collapse">
                         <ul class="nav">
                             <li class="active"><a href="#">Home</a></li>
@@ -59,7 +60,7 @@
                         <form class="navbar-form pull-right" action="sections/login/take_login.php" method="POST">
                             <input class="span2" type="text" name="signinUsername" placeholder="Username">
                             <input class="span2" type="password" name="signinPassword" placeholder="Password">
-                            <button type="submit" class="btn">Sign in</button>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
                         </form>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -118,7 +119,7 @@
                       </div>
                       <div class="control-group">
                         <div class="controls">
-                          <button type="submit" class="btn">Register</button>
+                          <button type="submit" class="btn btn-primary">Register</button>
                         </div>
                       </div>
                     </form>
@@ -137,7 +138,6 @@
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
         <script src="js/vendor/bootstrap.min.js"></script>
-
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
 
