@@ -68,6 +68,29 @@
         <div class="container">
 
             <!-- Main hero unit for a primary marketing message or call to action -->
+            <?php
+                if (isset($_GET['signIn']))
+                {
+                    if ($_GET['signIn'] == 0)
+                    {
+                    ?>
+                    <div class="alert alert-warning">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>D&rsquo;oh!</strong> The username or password was wrong.
+                    </div>
+                <?php
+                    }
+                    else if ($_GET['signIn'] == 1 && isset($_GET['username']))
+                    {
+                    ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Welcome <?php echo $_GET['username']; ?>!</strong> You have been logged in.
+                    </div>
+                    <?php
+                    }
+                }
+               ?>
             <div class="hero-unit">
                 <h1>Welcome!</h1>
                 <p>The goal of BootstrapCMS is to build a basic working content management system built around Twitter Bootstrap. This is primarily for personal learning purposes, as I look to better understand how content management systems fucntion.</p>

@@ -57,7 +57,7 @@
         function verify_user($username, $password)
         {
             $oDB = new Database;
-            $this->error = false;
+            $this->error = true;
 
             //Check if there is a matching username, if there is, we don't want duplicates, so prevent them from !
             $oDB->query('SELECT username, password FROM users WHERE username = :username');
@@ -68,12 +68,31 @@
             {
                 if ($this->verify_password($password, $usernameCheckRow['password']))
                 {
-                    echo "Nice!";
+                    $this->error = false;
                 }
                 else
                 {
-                    echo "D'oh!";
+                    $this->error = true;
                 }
+            }
+            else
+            {
+                $this->error = true;
+            }
+
+            switch($this->error)
+            {
+                case true:
+                    //there was an error, return false
+                    return false;
+                    break;
+                case false:
+                    //No errors, let's go!
+                    return true;
+                    break;
+                default:
+                    //who knows...let's go with false in case something was wrong
+                    return false;
             }
         }
 
