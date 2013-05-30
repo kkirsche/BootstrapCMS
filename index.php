@@ -50,8 +50,6 @@
                                     <li><a href="#">Action</a></li>
                                     <li><a href="#">Another action</a></li>
                                     <li><a href="#">Something else here</a></li>
-                                    <li class="divider"></li>
-                                    <li class="nav-header">Nav header</li>
                                     <li><a href="#">Separated link</a></li>
                                     <li><a href="#">One more separated link</a></li>
                                 </ul>
@@ -71,16 +69,16 @@
 
             <!-- Main hero unit for a primary marketing message or call to action -->
             <div class="hero-unit">
-                <h1>Hello, world!</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <h1>Welcome!</h1>
+                <p>The goal of BootstrapCMS is to build a basic working content management system built around Twitter Bootstrap. This is primarily for personal learning purposes, as I look to better understand how content management systems fucntion.</p>
                 <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
             </div>
 
             <!-- Example row of columns -->
             <div class="row">
                 <div class="span4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <h2>Über Secure</h2>
+                    <p>One of the main goals of this project, aside from basic learning, was to ensure that the design and implementation of all code was safe and secure. For this reason, passwords are securely encrypted using Blowfish, which prevents the password for being decrypted. For this reason, you can be sure that the passwords used with this system, even if leaked online, will be safe and secure.</p>
                     <p><a class="btn" href="#">View details &raquo;</a></p>
                 </div>
                 <div class="span4">
