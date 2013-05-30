@@ -11,5 +11,17 @@
         {
             header("Location: http://localhost:8888/BootstrapCMS/index.php?createUser=1&username=" . $_POST['registerUsername']);
         }
+        else
+        {
+            header("Location: http://localhost:8888/BootstrapCMS/index.php?createUser=0&username=" . $_POST['registerUsername']);
+        }
+    }
+    else if (!isset($_POST['registerUsername']))
+    {
+        header("Location: http://localhost:8888/BootstrapCMS/index.php?createUser=2");
+    }
+    else if (!isset($_POST['registerPassword']))
+    {
+        header("Location: http://localhost:8888/BootstrapCMS/index.php?createUser=2");
     }
 ?>

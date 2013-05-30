@@ -99,6 +99,33 @@
                         </div>
                         <?php
                         }
+                        else if ($_GET['createUser'] == 0)
+                        {
+                        ?>
+                        <div class="alert alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>D&rsquo;oh!</strong> The username <?php echo $_GET['username']; ?> is already taken!
+                        </div>
+                        <?php
+                        }
+                        else if ($_GET['createUser'] == 2)
+                        {
+                        ?>
+                        <div class="alert alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>D&rsquo;oh!</strong> Enter a username!
+                        </div>
+                        <?php
+                        }
+                        else if ($_GET['createUser'] == 3)
+                        {
+                        ?>
+                        <div class="alert alert-warning">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>D&rsquo;oh!</strong> Enter a password!
+                        </div>
+                        <?php
+                        }
                     }
                     ?>
                     <h2>Register Now!</h2>
@@ -106,13 +133,13 @@
                         <div class="control-group">
                             <label class="control-label" for="inputUsername">Username</label>
                             <div class="controls">
-                                <input type="text" class="span4" id="inputUsername" name="registerUsername" placeholder="Username">
+                                <input type="text" class="span4" id="inputUsername" name="registerUsername" placeholder="Username" required>
                             </div>
                         </div>
                       <div class="control-group">
                         <label class="control-label" for="inputPassword">Password</label>
                         <div class="controls">
-                          <input type="password" class="span4" id="inputPassword" name="registerPassword" placeholder="Password">
+                          <input type="password" class="span4" id="inputPassword" name="registerPassword" placeholder="Password" required>
                         </div>
                       </div>
                       <div class="control-group">
