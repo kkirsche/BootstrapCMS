@@ -5,7 +5,12 @@
     if($oLogin->verify_user($_POST['signinUsername'], $_POST['signinPassword']))
     {
         // The user is who we want! Yay! Let's setup the session for the.
-        header("Location: http://localhost:8888/BootstrapCMS/index.php?signIn=1&username=" . $_POST['signinUsername']);
+        session_start();
+        $userID = $oLogin->get_userID($_POST['signinUsername']);
+        $_SESSION['user'] = $userID;
+        $_SESSION['username'] = $_POST['signinUsername'];
+        header("Location: http://localhost:8888/BootstrapCMS/index.php");
+        exit();
     }
     else
     {

@@ -54,6 +54,24 @@
             }
         }
 
+        function get_userID($username)
+        {
+            $oDB = new Database;
+            //Check if there is a matching username, if there is, we don't want duplicates, so prevent them from !
+            $oDB->query('SELECT id FROM users WHERE username = :username');
+            $oDB->bind(':username', $username);
+            $usernameCheckRow = $oDB->single();
+
+            if (isset($usernameCheckRow['id']))
+            {
+                return $usernameCheckRow['id'];
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         function verify_user($username, $password)
         {
             $oDB = new Database;
@@ -94,6 +112,15 @@
                     //who knows...let's go with false in case something was wrong
                     return false;
             }
+        }
+
+        //Log the user out of our application.
+        function logout_user()
+        {  
+            session_start();
+            session_destroy();
+
+            return true;
         }
 
         //This function verifies a user's password against the one in the database

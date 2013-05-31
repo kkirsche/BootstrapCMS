@@ -1,3 +1,9 @@
+<?php
+session_start();
+
+if (isset($_SESSION['username']))
+{
+    ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -55,11 +61,160 @@
                                 </ul>
                             </li>
                         </ul>
+                        <p class="pull-right whiteText oneEmMarginTop">Welcome, <?php echo $_SESSION['username']; ?>! | <a href="sections/login/take_logout.php" title="Logout" class="whiteText">Logout</a></p>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Main hero unit for a primary marketing message or call to action -->
+            <?php
+                if (isset($_GET['signIn']))
+                {
+                    if (isset($_SESSION['userID']) && isset($_SESSION['username']))
+                    {
+                    ?>
+                    <div class="alert alert-success">
+                        <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Welcome <?php echo $_GET['username']; ?>!</strong> You have been logged in.
+                    </div>
+                    <?php
+                    }
+                }
+               ?>
+            <div class="hero-unit">
+                <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+                <p>The goal of BootstrapCMS is to build a basic working content management system built around Twitter Bootstrap. This is primarily for personal learning purposes, as I look to better understand how content management systems fucntion.</p>
+                <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+            </div>
+
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="span4">
+                    <h2>Über Secure</h2>
+                    <p>One of the main goals of this project, aside from basic learning, was to ensure that the design and implementation of all code was safe and secure. For this reason, passwords are securely encrypted using Blowfish, which prevents the password for being decrypted. For this reason, you can be sure that the passwords used with this system, even if leaked online, will be safe and secure.</p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div>
+                <div class="span4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+               </div>
+                <div class="span4">
+                    <h2>Heading</h2>
+                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                    <p><a class="btn" href="#">View details &raquo;</a></p>
+                </div>
+            </div>
+
+            <hr>
+
+            <footer>
+                <p>&copy; Company 2012</p>
+            </footer>
+
+        </div> <!-- /container -->
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+
+        <script src="js/vendor/bootstrap.min.js"></script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>
+
+
+<?php
+}
+else
+{
+//Non-logged in user!
+?>
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <style>
+            body {
+                padding-top: 60px;
+                padding-bottom: 40px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
+        <link rel="stylesheet" href="css/flat-ui.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="#">BootstrapCMS</a>
+                    <div class="nav-collapse collapse">
+                        <ul class="nav">
+                            <li class="active"><a href="#">Home</a></li>
+                            <li><a href="#about">About</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <?php
+                        if (isset($_SESSION['user']))
+                        {
+                        ?>
+                        <p class="pull-right whiteText oneEmMarginTop">Welcome, <?php echo $_SESSION['username']; ?>! | <a href="sections/login/take_logout.php" title="Logout" class="whiteText">Logout</a></p>
+                        <?php
+                        }
+                        else
+                        {
+                        ?>
                         <form class="navbar-form pull-right" action="sections/login/take_login.php" method="POST">
                             <input class="span2" type="text" name="signinUsername" placeholder="Username">
                             <input class="span2" type="password" name="signinPassword" placeholder="Password">
                             <button type="submit" class="btn btn-primary">Sign in</button>
                         </form>
+                        <?php
+                        }
+                        ?>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
@@ -80,7 +235,7 @@
                     </div>
                 <?php
                     }
-                    else if ($_GET['signIn'] == 1 && isset($_GET['username']))
+                    else if (isset($_SESSION['userID']) && isset($_SESSION['username']))
                     {
                     ?>
                     <div class="alert alert-success">
@@ -197,3 +352,6 @@
         </script>
     </body>
 </html>
+<?php
+}
+?>
