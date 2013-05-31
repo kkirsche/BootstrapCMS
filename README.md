@@ -3,5 +3,5 @@ BootstrapCMS
 
 Bootstrap Fueled CMS
 
-!(http://i.imgur.com/FY7eaxd.jpg)[Homepage Logged Out]<br />
-!(http://i.imgur.com/YXePoei.jpg)[Homepage  Logged In]
+![Homepage Logged Out][http://i.imgur.com/FY7eaxd.jpg]<br />
+![Homepage  Logged In][http://i.imgur.com/YXePoei.jpg]
