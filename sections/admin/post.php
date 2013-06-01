@@ -1,18 +1,18 @@
 <?php
-    require_once('classes/class_menu.php');
-    require_once('classes/class_page.php');
-    require_once('config.php');
+    require_once('/Applications/MAMP/htdocs/BootstrapCMS/classes/class_menu.php');
+    require_once('/Applications/MAMP/htdocs/BootstrapCMS/classes/class_page.php');
+    require_once('/Applications/MAMP/htdocs/BootstrapCMS/config.php');
     session_start();
     $oMenu = new Menu;
     $oPage = new Page;
 
     if (isset($_SESSION['username']))
     {
-        require_once('sections/header/header_Private.php');
+        require_once('/Applications/MAMP/htdocs/BootstrapCMS/sections/header/header_Private.php');
     }
     else
     {
-        require_once('sections/header/header_Public.php');
+        require_once('/Applications/MAMP/htdocs/BootstrapCMS/sections/header/header_Public.php');
     }
     ?>
         <div class="container">
@@ -23,16 +23,16 @@
                     //User is logged in
                     if (isset($_GET['id']))
                     {
-                        echo $oPage->get_page($_GET['id']);
+                        echo $oPage->get_admin_page($_GET['id']);
                     }
                     else
                     {
-                        echo $oPage->get_page(1);
+                        echo $oPage->get_admin_page(1);
                     }
                 }
                 else
                 {
-                    require_once('sections/homepage/homepage_public.php');
+                    require_once('/Applications/MAMP/htdocs/BootstrapCMS/sections/homepage/homepage_public.php');
                 }
             ?>
 

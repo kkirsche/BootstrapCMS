@@ -1,5 +1,6 @@
 <?php
     require_once('class_database.php');
+    require_once('class_google2FA.php');
 
     class User
     {
@@ -9,6 +10,9 @@
         private $passwordSalt;
         private $error;
         private $numberOfResults;
+        private $oTwoFactorAuth;
+        private $initKey;
+        private $QRCode;
 
         //This function creates a new user
         function create_user($username, $password)
@@ -30,17 +34,25 @@
             if ($this->error != true)
             {
                 $this->username = $username;
-                //Generate a unique salt for the user
+                //Encrypt the password
                 $this->passwordHash = $this->better_crypt($password, 7);
-                //Use the unique salt to generate an encrypted password
+
+                $oTFA = new Google2FA;
+                //first we need our secret
+                $this->initKey = $oTFA->generate_secret_key();
+
+                //next let's make that a secret key
+                $secretKey = $oTFA->base32_decode($this->initKey);
 
                 //Begin the transaction
                 $oDB->beginTransaction();
                 //Prep the statement to put these into our database.
-                $oDB->query("INSERT into users (username, password) VALUES (:username, :password)");
+                $oDB->query("INSERT into users (username, password, TFA_initKey, TFA_secretKey) VALUES (:username, :password, :initKey, :secretKey)");
                 //Bind the data we want
                 $oDB->bind(':username', $username);
                 $oDB->bind(':password', $this->passwordHash);
+                $oDB->bind(':initKey', $this->initKey);
+                $oDB->bind(':secretKey', $secretKey);
                 //Execute the statement
                 $oDB->execute();
                 //End the transaction
@@ -51,6 +63,23 @@
             else
             {
                 return false;
+            }
+        }
+
+        function getQRCode_For_twoFactorAuthentication($userID)
+        {
+            session_start();
+            $oTFA = new Google2FA;
+            $oDB = new Database;
+
+            $oDB->query('SELECT TFA_initKey FROM users WHERE id = :userID');
+            $oDB->bind(':userID', $userID);
+            $userInfo = $oDB->single();
+
+            if (isset($userInfo['TFA_initKey']))
+            {
+                $QRCode = $oTFA->getQRCodeGoogleUrl($userInfo['TFA_initKey']);
+                echo '<img src="' . $QRCode . '" alt="QRCode" />';
             }
         }
 
@@ -116,7 +145,7 @@
 
         //Log the user out of our application.
         function logout_user()
-        {  
+        {
             session_start();
             session_destroy();
 
