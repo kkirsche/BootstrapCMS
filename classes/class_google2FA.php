@@ -60,6 +60,18 @@ class Google2FA {
     }
 
     /**
+     * Get QR-Code URL for image, from google charts
+     *
+     * @param string $name
+     * @param string $secret
+     * @return string
+     */
+    public function getQRCodeGoogleUrl($secret) {
+        $urlencoded = urlencode('otpauth://totp/BootstrapCMS?secret='.$secret.'');
+        return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl='.$urlencoded.'';
+    }
+
+    /**
      * Returns the current Unix Timestamp devided by the keyRegeneration
      * period.
      * @return integer
@@ -164,7 +176,7 @@ class Google2FA {
 
 }
 
-$InitalizationKey = "PEHMPSDNLXIOG65U";                 // Set the inital key
+/*$InitalizationKey = "PEHMPSDNLXIOG65U";                 // Set the inital key
 
 $TimeStamp    = Google2FA::get_timestamp();
 $secretkey    = Google2FA::base32_decode($InitalizationKey);    // Decode it into binary
@@ -178,4 +190,4 @@ echo("One time password: $otp\n");
 
 $result = Google2FA::verify_key($InitalizationKey, "123456");
 
-var_dump($result);
+var_dump($result);*/
